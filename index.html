@@ -283,16 +283,22 @@ p {
 <body>
 
 <!-- BACKGROUND MUSIC -->
-<audio id="bgMusic" loop controls>
-    <source src="music.mp3" type="audio/mpeg">
+<audio id="bgMusic" loop preload="auto">
+    <source src="./music.mp3" type="audio/mpeg">
 </audio>
 
 
+<!-- OPENING -->
 <section>
     <div class="container">
-        <div class="small">A little something for you</div>
 
-        <h1>Ameenah<span class="heart">.</span></h1>
+        <div class="small">
+            A little something for you
+        </div>
+
+        <h1>
+            Ameenah<span class="heart">.</span>
+        </h1>
 
         <div class="divider"></div>
 
@@ -304,15 +310,22 @@ p {
         <button class="button" onclick="openStory()">
             Open this for me ♡
         </button>
+
     </div>
 </section>
 
 
+<!-- STORY -->
 <section id="story">
     <div class="container">
-        <div class="small">Our story</div>
 
-        <h2>Two years of us.</h2>
+        <div class="small">
+            Our story
+        </div>
+
+        <h2>
+            Two years of us.
+        </h2>
 
         <p>
             We've had the sweet moments, the ridiculous moments,
@@ -330,44 +343,66 @@ p {
             But somehow, through all of that, there were still moments
             that reminded me why I chose you in the first place.
         </p>
+
     </div>
 </section>
 
 
+<!-- MEMORIES -->
 <section>
     <div class="container">
-        <div class="small">The memories</div>
 
-        <h2>The good parts mattered.</h2>
+        <div class="small">
+            The memories
+        </div>
+
+        <h2>
+            The good parts mattered.
+        </h2>
 
         <div class="cards">
 
             <div class="card">
-                <h3>The laughter</h3>
+                <h3>
+                    The laughter
+                </h3>
+
                 <p>
                     The random conversations, the jokes,
                     the moments where everything felt easy.
                 </p>
             </div>
 
+
             <div class="card">
-                <h3>The romance</h3>
+                <h3>
+                    The romance
+                </h3>
+
                 <p>
                     The closeness, the affection and those moments
                     that belonged only to us.
                 </p>
             </div>
 
+
             <div class="card">
-                <h3>The difficult days</h3>
+                <h3>
+                    The difficult days
+                </h3>
+
                 <p>
                     We weren't perfect. We hurt each other sometimes.
                     But those moments became part of our story too.
                 </p>
             </div>
 
+
             <div class="card">
-                <h3>Still here</h3>
+                <h3>
+                    Still here
+                </h3>
+
                 <p>
                     After everything, I still find myself wanting
                     to build something real with you.
@@ -375,18 +410,24 @@ p {
             </div>
 
         </div>
+
     </div>
 </section>
 
 
+<!-- LETTER -->
 <section>
     <div class="container">
 
-        <div class="small">From Sammy</div>
+        <div class="small">
+            From Sammy
+        </div>
 
         <div class="letter">
 
-            <h2>For Ameenah,</h2>
+            <h2>
+                For Ameenah,
+            </h2>
 
             <p>
                 I don't want to pretend that our relationship has
@@ -429,16 +470,22 @@ p {
             </div>
 
         </div>
+
     </div>
 </section>
 
 
+<!-- FINAL QUESTION -->
 <section class="question">
     <div class="container">
 
-        <div class="small">One last thing</div>
+        <div class="small">
+            One last thing
+        </div>
 
-        <h2>Will you continue to be mine?</h2>
+        <h2>
+            Will you continue to be mine?
+        </h2>
 
         <p>
             Not just for the easy days.
@@ -457,16 +504,23 @@ p {
             </button>
 
         </div>
+
     </div>
 </section>
 
 
+<!-- YES SCREEN -->
 <div class="final" id="finalScreen">
 
     <div>
-        <div class="small">She said yes</div>
 
-        <h1>It's still us<span class="heart">.</span></h1>
+        <div class="small">
+            She said yes
+        </div>
+
+        <h1>
+            It's still us<span class="heart">.</span>
+        </h1>
 
         <div class="divider"></div>
 
@@ -478,6 +532,7 @@ p {
         <p class="signature">
             Always yours, Sammy ❤️
         </p>
+
     </div>
 
 </div>
@@ -485,19 +540,19 @@ p {
 
 <script>
 
+/* ================================
+   BACKGROUND MUSIC
+================================ */
+
 function openStory() {
 
     const music = document.getElementById("bgMusic");
 
     music.volume = 0.55;
 
-    const playPromise = music.play();
-
-    if (playPromise !== undefined) {
-        playPromise.catch(function() {
-            console.log("Music playback was blocked by the browser.");
-        });
-    }
+    music.play().catch(function(error) {
+        console.log("Music could not start:", error);
+    });
 
     document.getElementById("story").scrollIntoView({
         behavior: "smooth"
@@ -505,18 +560,27 @@ function openStory() {
 }
 
 
+/* ================================
+   YES BUTTON
+================================ */
+
 function sayYes() {
 
     document.getElementById("finalScreen").classList.add("show");
 
     for (let i = 0; i < 25; i++) {
+
         setTimeout(createHeart, i * 70);
+
     }
 }
 
 
-const noButton = document.getElementById("noButton");
+/* ================================
+   NO BUTTON
+================================ */
 
+const noButton = document.getElementById("noButton");
 
 function moveNoButton() {
 
@@ -530,9 +594,7 @@ function moveNoButton() {
         "translate(" + x + "px, " + y + "px)";
 }
 
-
 noButton.addEventListener("mouseenter", moveNoButton);
-
 
 noButton.addEventListener("touchstart", function(event) {
 
@@ -543,14 +605,20 @@ noButton.addEventListener("touchstart", function(event) {
 });
 
 
+/* ================================
+   FLOATING HEARTS
+================================ */
+
 function createHeart() {
 
     const heart = document.createElement("div");
 
     heart.className = "floating-heart";
+
     heart.innerHTML = "♥";
 
-    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.left =
+        Math.random() * 100 + "vw";
 
     heart.style.fontSize =
         (12 + Math.random() * 22) + "px";
@@ -561,15 +629,24 @@ function createHeart() {
     document.body.appendChild(heart);
 
     setTimeout(function() {
+
         heart.remove();
+
     }, 9000);
+
 }
 
+
+/* ================================
+   AUTOMATIC HEARTS
+================================ */
 
 setInterval(function() {
 
     if (Math.random() > 0.35) {
+
         createHeart();
+
     }
 
 }, 1800);
